@@ -29,6 +29,7 @@ const loopAverage = () => {
   return total / numArray.length
 }
 
+// for loop for adding each names length and averaging the total value
 const nameLengthAvg=()=>{
 let total=0;
 for(let x=0; x < nameArray.length;x++){
