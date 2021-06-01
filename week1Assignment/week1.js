@@ -42,6 +42,7 @@ const nameLengthAvg = () => {
 
 const nameArray = ["Sam", "Tommy", "Tim", "Sally", "Buck", "Bob"];
 
+// Following code is for console logging the results in a formatted method
 console.log(`\nHere is the original array : ${numArray}\n`);
 console.log(
   `Adding first and last element in array that results in the sum of ->`,
