@@ -1,4 +1,5 @@
 const numArray = [3, 9, 23, 64, 2, 8, 28, 93];
+const nameArray = ["Sam", "Tommy", "Tim", "Sally", "Buck", "Bob"];
 
 /* lastElement holds the last element in array and updates each time a number is added to the array */
 const lastElement = () => {
@@ -40,7 +41,7 @@ const nameLengthAvg = () => {
   return total / nameArray.length;
 };
 
-const nameArray = ["Sam", "Tommy", "Tim", "Sally", "Buck", "Bob"];
+
 
 // Following code is for console logging the results in a formatted method
 console.log(`\nHere is the original array : ${numArray}\n`);
