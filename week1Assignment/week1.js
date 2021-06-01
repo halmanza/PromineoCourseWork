@@ -43,17 +43,20 @@ const nameLengthAvg = () => {
 const nameArray = ["Sam", "Tommy", "Tim", "Sally", "Buck", "Bob"];
 
 console.log(`\nHere is the original array : ${numArray}\n`);
-console.log(`Adding first and last element in array that results in the sum of ->`, numAdd());
+console.log(
+  `Adding first and last element in array that results in the sum of ->`,
+  numAdd()
+);
 
-adder(15)
-console.log('Now adding the integer 15 to the end of the array\n',numArray);
+adder(15);
+console.log("Now adding the integer 15 to the end of the array\n", numArray);
 
-console.log('Here is the new result of adding the first number with the new last array value:\n', numAdd());
-
-
-
+console.log(
+  "Here is the new result of adding the first number with the new last array value:\n",
+  numAdd()
+);
 
 console.log("\nAverage of array values", loopAverage());
 
-console.log('\nArray of names ', nameArray)
+console.log("\nArray of names ", nameArray);
 console.log("Average of length of names", nameLengthAvg());
