@@ -9,14 +9,8 @@ const lastElement = () => {
 };
 /* numAdd adds first and last numbers in array */
 const numAdd = () => {
-  let total = 0;
-  ages.filter((item) => {
-    if (item === ages[0]) {
-      total += item + lastElement();
-    }
-  });
-  return total;
-};
+  return lastElement() - ages.shift()
+}
 /* adder pushes number into array */
 const adder = (num) => {
   ages.push(num);
@@ -120,7 +114,7 @@ const selectOdds=(arr)=>{
 // Following code is for console logging the results in a formatted method
 console.log(`\n Here is the original ages array : ${ages}`);
 console.log(
-  "\n Adding first and last element in array that results in the sum of ->",
+  "\n Result of subtracting the first number in the array from the last ->",
   numAdd()
 );
 
@@ -128,7 +122,7 @@ adder(15);
 console.log("\n Now adding the integer 15 to the end of the array\n", ages);
 
 console.log(
-  "\n Here is the new result of adding the first number with the new last array value:\n",
+  "\n Here is the new result of subtracting the first number from the new last index value in ages:\n",
   numAdd()
 );
 
