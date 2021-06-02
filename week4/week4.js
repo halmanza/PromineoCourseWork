@@ -16,7 +16,7 @@ const processSplicedValue = (array, indexNum, response) => {
   let splicer = array.splice(indexNum, 1);
   response(splicer);
 
-  if (typeof callback === "function") {
+  if (typeof callback == "function") {
     callback(splicer);
   }
 };
