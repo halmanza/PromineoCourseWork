@@ -1,4 +1,3 @@
-
 // Books class is responsible for creating title and author objects
 
 class Books {
@@ -13,7 +12,7 @@ class Books {
 }
 
 //Menu class creates user interface for user to create a list of authors, book titles, or a combined
-// list of author with their books. The list properties of author and title can be updated or deleted by user. 
+// list of author with their books. The list properties of author and title can be updated or deleted by user.
 // Lastly the Menu class has a method to view the list after each iteration of change etc.
 class Menu {
   constructor() {
@@ -43,6 +42,9 @@ class Menu {
           break;
         case "6":
           this.updateBookTitle();
+          break;
+          case "7":
+          this.updateBookAuthor();
           break;
         case "8":
           console.log(
@@ -103,6 +105,19 @@ class Menu {
         item.title = newTitle;
       } else {
         console.log("Title could not be found.");
+      }
+    });
+  }
+
+  updateBookAuthor() {
+    let updateAuthor = prompt("Please Enter the author for updating");
+    let newAuthor = prompt("Enter the author you desire for updating");
+    let valuesArray = this.bookSelection;
+    valuesArray.filter((item) => {
+      if (item.author === updateAuthor) {
+        item.author = newAuthor;
+      } else {
+        console.log("Author could not be found.");
       }
     });
   }
