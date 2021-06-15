@@ -43,7 +43,7 @@ class Menu {
         case "6":
           this.updateBookTitle();
           break;
-          case "7":
+        case "7":
           this.updateBookAuthor();
           break;
         case "8":
@@ -111,15 +111,18 @@ class Menu {
 
   updateBookAuthor() {
     let updateAuthor = prompt("Please Enter the author for updating");
-    let newAuthor = prompt("Enter the author you desire for updating");
+    let newAuthor = prompt("Enter the updated author");
     let valuesArray = this.bookSelection;
-    valuesArray.filter((item) => {
+    let flatArray = valuesArray.flat(1);
+    flatArray.filter((item) => {
       if (item.author === updateAuthor) {
         item.author = newAuthor;
+        return [item.author, item.title];
       } else {
-        console.log("Author could not be found.");
+        console.log("author not found.");
       }
     });
+    console.log(flatArray);
   }
 
   deleteBookTitle() {
