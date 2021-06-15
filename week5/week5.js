@@ -1,3 +1,6 @@
+
+// Books class is responsible for creating title and author objects
+
 class Books {
   constructor() {}
 
@@ -9,6 +12,9 @@ class Books {
   }
 }
 
+//Menu class creates user interface for user to create a list of authors, book titles, or a combined
+// list of author with their books. The list properties of author and title can be updated or deleted by user. 
+// Lastly the Menu class has a method to view the list after each iteration of change etc.
 class Menu {
   constructor() {
     this.bookSelection = [];
