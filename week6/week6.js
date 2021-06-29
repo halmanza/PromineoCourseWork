@@ -1,23 +1,6 @@
+const CARDVALUES = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'Jack', 'Queen', 'King']
+const CARDSUITS = ['Club', 'Diamond', 'Heart', 'Spade'];
 
-
-const CARDVALUES = [
-  "A",
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  "Jack",
-  "Queen",
-  "King",
-];
-const CARDSUITS = ["Club", "Diamond", "Heart", "Spade"];
 
 class Card {
   constructor(cardVal, cardSuits) {
@@ -36,25 +19,23 @@ class Deck {
     return this.cards.length;
   }
 
-  //shuffle similar to fisher-yates algorithim
+
   shuffle() {
     for (let x = this.cardLength() - 1; x > 0; x--) {
       const randomVal = Math.floor(Math.random() * (x - 1));
       const storedVal = this.cards[randomVal];
       this.cards[randomVal] = this.cards[x];
       this.cards[x] = storedVal;
+
     }
   }
 
-  /*Method deal takes 25 cards from the deck object and stores them in an array for usage by player.
-  It requires reshuffling after dealing each hand for randomization of cards.
-   */
   deal() {
     let dealtHand = [];
 
     for (let cardix = 0; this.cardLength() > cardix; cardix++) {
-      if (cardix >= 25) break;
-      dealtHand.push(this.cards[cardix]);
+      if (cardix >= 26) break;
+      dealtHand.push(this.cards[cardix])
     }
     return dealtHand;
   }
@@ -68,66 +49,129 @@ class Player {
   initialHand(intake) {
     this.hand.push(intake);
     this.hand = this.hand.flat(2);
-    console.log();
+    console.log()
+
   }
 }
 
 /* Creates a winning player object to update at end of comparison with winning player based on round of hands won */
 
+
 const compareEachRound = (player1, player2) => {
   let winningPlayer = {
-    player: "",
-    points: 0,
+    player: '',
+    points: 0
   };
 
-  const player1Hand = player1.filter((hand) => {
-    return hand.cardSuits, hand.cardVal;
+  const player1Hand = player1.filter(hand => {
+    return hand.cardSuits, hand.cardVal
   });
-  const player2Hand = player2.filter((hand2) => {
-    return hand2.cardSuits, hand2.cardVal;
+  const player2Hand = player2.filter(hand2 => {
+    return hand2.cardSuits, hand2.cardVal
   });
 
-  if (player1Hand.length == player2Hand.length) {
-    let team1Score = 0;
-    let team2Score = 0;
 
-    for (let x = 0; x < player1Hand.length; x++) {
-      if (player1Hand[x].cardVal > player2Hand[x].cardVal) {
-        team1Score += 1;
-        console.log(
-          `Player 1 wins this round with a ${player1Hand[x].cardSuits} ${player1Hand[x].cardVal}`
-        );
-      } else if (player1Hand[x].cardVal === player2Hand[x].cardVal) {
-        team1Score += 1;
-        team2Score += 1;
-        console.log("It's a draw for this round");
-      } else {
-        team2Score += 1;
-        console.log(
-          `Player 2 wins this round with a ${player2Hand[x].cardSuits} ${player2Hand[x].cardVal}`
-        );
-      }
+  let team1Score = 0;
+  let team2Score = 0;
+
+  for (let x = 1; x < player1Hand.length; x++) {
+    switch (player1Hand.length === player2Hand.length) {
+      //case section for player 1 winning
+      case player1Hand[x].cardVal > player2Hand[x].cardVal:
+        team1Score++;
+        console.log('Player 1 wins with a ' + ' ' + player1Hand[x].cardSuits + ' ' + player1Hand[x].cardVal+ ' round' +' '+x)
+        break;
+
+      case player2Hand[x].cardVal > player1Hand[x].cardVal:
+        team2Score++;
+        console.log('Player 2 wins with a ' + ' ' + player2Hand[x].cardSuits + ' ' + player2Hand[x].cardVal + 
+        ' round' +' '+x)
+        break;
+
+        //King wins for player 1
+      case player1Hand[x] === 'King' && player2Hand[x].cardVal === 'Queen' || player2Hand[x].cardVal === 'Jack' ||
+      player2Hand[x].cardVal === 'Ace' || typeof player2Hand[x].cardVal === 'number':
+        team1Score++;
+        console.log('Player 1 wins with a ' + ' ' + player1Hand[x].cardSuits + ' ' + player1Hand[x].cardVal +
+        ' round' +' '+x)
+        break;
+
+        //king wins for player 2
+      case player2Hand[x] === 'King' && player1Hand[x].cardVal === 'Queen' || player1Hand[x].cardVal === 'Jack' ||
+      player1Hand[x].cardVal === 'Ace' || typeof player1Hand[x].cardVal === 'number':
+        team2Score++;
+        console.log('Player 2 wins with a ' + ' ' + player2Hand[x].cardSuits + ' ' + player2Hand[x].cardVal+ ' round' +' '+x
+        )
+        break;
+
+        //Queen wins for player 1
+      case player1Hand[x] === 'King' && player2Hand[x].cardVal === 'Queen' || player2Hand[x].cardVal === 'Jack' ||
+      player2Hand[x].cardVal === 'Ace' || typeof player2Hand[x].cardVal === 'number':
+        team1Score++;
+        console.log('Player 1 wins with a ' + ' ' + player1Hand[x].cardSuits + ' ' + player1Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
+        //Queen wins for player 2
+      case player2Hand[x] === 'Queen' && player1Hand[x].cardVal === 'Jack' ||
+      player1Hand[x].cardVal === 'Ace' || typeof player1Hand[x].cardVal === 'number':
+        team2Score++;
+        console.log('Player 2 wins with a ' + ' ' + player2Hand[x].cardSuits + ' ' + player2Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
+        //Jack wins for player 1
+      case player1Hand[x] === 'Jack' && player2Hand[x].cardVal === 'Ace' || typeof player2Hand[x].cardVal === 'number':
+        team1Score++;
+        console.log('Player 1 wins with a ' + ' ' + player1Hand[x].cardSuits + ' ' + player1Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
+        //Jack wins for player 2
+      case player2Hand[x] === 'Jack' && player1Hand[x].cardVal === 'Ace' || typeof player1Hand[x].cardVal === 'number':
+        team2Score++;
+        console.log('Player 2 wins with a ' + ' ' + player2Hand[x].cardSuits + ' ' + player2Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
+        //Ace wins for player 1
+      case player1Hand[x] === 'Ace' && typeof player2Hand[x].cardVal === 'number':
+        team1Score++;
+        console.log('Player 1 wins a ' + ' ' + player1Hand[x].cardSuits + ' ' + player1Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
+        //Ace wins for player 2
+      case player2Hand[x] === 'Ace' && typeof player1Hand[x].cardVal === 'number':
+        team2Score++;
+        console.log('Player 2 wins with a ' + ' ' + player2Hand[x].cardSuits + ' ' + player2Hand[x].cardVal +
+        'round' +' '+x)
+        break;
+
     }
-    team1Score > team2Score
-      ? (winningPlayer = {
-          player: "Player 1",
-          points: team1Score,
-        })
-      : (winningPlayer = {
-          player: "Player 2",
-          points: team2Score,
-        });
+
   }
-  return winningPlayer;
-};
+
+  team1Score > team2Score ?
+    (winningPlayer = {
+      player: "Player 1",
+      points: team1Score,
+    }) :
+    (winningPlayer = {
+      player: "Player 2",
+      points: team2Score,
+    });
+  console.log(`The winning player is ${winningPlayer.player} with ${winningPlayer.points} points!`)
+}
 
 function createNewDeck() {
-  return CARDSUITS.flatMap((suits) => {
-    return CARDVALUES.map((val) => {
+  return CARDSUITS.flatMap(suits => {
+    return CARDVALUES.map(val => {
       return new Card(val, suits);
-    });
-  });
+    })
+  })
 }
+
 
 let newGame = new Deck();
 let player1 = new Player();
@@ -141,4 +185,7 @@ newGame.shuffle();
 /* shuffle to randomize for each new hand dealt to player */
 player2.initialHand(newGame.deal());
 
-console.log(compareEachRound(player1.hand, player2.hand));
+
+
+
+compareEachRound(player1.hand, player2.hand);
