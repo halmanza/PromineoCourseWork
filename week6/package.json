@@ -1,0 +1,15 @@
+{
+  "name": "week6",
+  "version": "1.0.0",
+  "description": "Week 6 project ",
+  "main": "week6.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anthony Almanza",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.1"
+  }
+}

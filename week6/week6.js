@@ -2,7 +2,7 @@ const CARDVALUES = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 'Jack', 'Queen', 
 const CARDSUITS = ['Club', 'Diamond', 'Heart', 'Spade'];
 
 
-class Card {
+ class Card {
   constructor(cardVal, cardSuits) {
     this.cardVal = cardVal;
     this.cardSuits = cardSuits;
