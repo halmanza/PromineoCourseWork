@@ -1,0 +1,14 @@
+
+node_modules/
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+logs
+*.log
+npm-debug.log*
+
+Thumbs.db
