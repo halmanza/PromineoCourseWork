@@ -8,49 +8,59 @@
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.css"
     />
+
     <title>HTML</title>
   </head>
   <body>
-    <div class="container-fluid bg-primary">
-      <div class="row text-center">
-        <div class="col-md-2">
-          <h4>Home</h4>
-        </div>
-        <div class="col-md-3">
-          <h4>About</h4>
-        </div>
-        <div class="col-md-3">
-          <h4>Contact</h4>
-        </div>
-        <div class="col-md">
-          <h4>Projects</h4>
-        </div>
-      </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">BootStrap 4.4.1 </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About</a>
+          </li>
+        </ul>
+        <span class="navbar-text text-white">The unofficial home of bootstrap documentation</span>
+      </div>
+    </nav>
     <div
       class="
         container
-        d-flex
-        bg-secondary
-        rounded
         mt-2
+        d-flex
+        flex-column
         justify-content-center
         align-items-center
-        text-center
+        bg-dark
+        text-white
       "
     >
-      <div class="row">
-        <div class="col-md">test</div>
-        <div class="col-md">test2</div>
-        <div class="col-md">
-          <div class="col-md bg-primary border border-5 border-danger">
-            testing7
-          </div>
-        </div>
-
-        <div class="col-md">test4</div>
-      </div>
+      <p class="ft-3">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis corporis
+        suscipit qui exercitationem reiciendis enim, cumque tempore aliquam
+        atque mollitia eveniet ipsum iure.
+      </p>
+      <p class="ft-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit minus unde vel.</p>
+      <p class="ft-3">Saepe voluptatibus aliquam natus non eligendi vitae corrupti hic vel laborum officia!</p>
+      <p class="ft-3">Consequuntur at tempore blanditiis necessitatibus accusantium repudiandae quos recusandae fugit, quae ab!</p>
+      <p class="ft-3">Veritatis beatae natus soluta sed dicta corrupti libero ratione minima earum consectetur?</p>
     </div>
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
