@@ -6,6 +6,7 @@ html {
     line-height: var(--lh);
   }
   
+  /* Great tutorial on truncate options at https://www.benmarshall.me/max-character-length-ellipsis-css/ */
   .truncate-overflow {
     --max-lines: 3;
     position: relative;
