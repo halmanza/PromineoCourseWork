@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.css"
     />
+    <link rel="stylesheet" href="style.css" />
 
     <title>HTML</title>
   </head>
@@ -37,32 +38,118 @@
             <a class="nav-link" href="./about.html">About</a>
           </li>
         </ul>
-        <span class="navbar-text text-white">The unofficial home of bootstrap documentation</span>
+        <span class="navbar-text text-white"
+          >The unofficial home of bootstrap documentation</span
+        >
       </div>
     </nav>
-    <div
-      class="
-        container
-        mt-2
-        d-flex
-        flex-column
-        justify-content-center
-        align-items-center
-        bg-dark
-        text-white
-      "
-    >
-      <p class="ft-3">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis corporis
-        suscipit qui exercitationem reiciendis enim, cumque tempore aliquam
-        atque mollitia eveniet ipsum iure.
-      </p>
-      <p class="ft-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit minus unde vel.</p>
-      <p class="ft-3">Saepe voluptatibus aliquam natus non eligendi vitae corrupti hic vel laborum officia!</p>
-      <p class="ft-3">Consequuntur at tempore blanditiis necessitatibus accusantium repudiandae quos recusandae fugit, quae ab!</p>
-      <p class="ft-3">Veritatis beatae natus soluta sed dicta corrupti libero ratione minima earum consectetur?</p>
+    <div class="alert alert-warning border mt-1 rounded-bottom">
+      Thank you for visiting!
+    </div>
+    <div class="container-fluid">
+      <div class="row-md">
+        <div
+          class="sm
+            mt-2
+            p-2
+            d-flex
+            justify-content-center
+            bg-secondary
+            text-light
+          "
+        >
+          <p class="ft-3">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius,
+            exercitationem! Rem ullam illo amet velit laudantium quo
+            voluptatibus, quia molestiae et eveniet eaque nostrum cum, itaque
+            officiis delectus! Ducimus, amet.
+          </p>
+        </div>
+
+        <div
+          class="sm
+            mt-2
+            p-2
+            d-flex
+            justify-content-center
+            bg-secondary
+            text-light
+          "
+        >
+          <p class="ft-3 m-1">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
+            corporis suscipit qui exercitationem reiciendis enim, cumque tempore
+            aliquam atque mollitia eveniet ipsum iure.
+          </p>
+        </div>
+
+        
+        <div class="table-responsive-sm mb-4">
+        <table class=" justify-content-center table table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col" >#</th>
+              <th scope="col">Version</th>
+              <th scope="col">Release Date</th>
+              <th scope="col">Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <th>1.0.0</th>
+              <th>August 19, 2011</th>
+              <th><a href="https://getbootstrap.com/1.0.0/" class="text-white">https://getbootstrap.com/1.0.0/</a></th>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <th>2.0.0</th>
+              <th>January 31, 2012</th>
+              <th><a class="text-white" href="https://getbootstrap.com/2.0.0/">https://getbootstrap.com/2.0.0/</a></th>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <th>3.0.0</th>
+              <th>August 19, 2013</th>
+              <th><a class="text-white" href="https://getbootstrap.com/docs/3.3/">https://getbootstrap.com/docs/3.3/</a></th>
+            </tr>
+            <tr class="table-dark text-dark">
+              <th scope="row">4</th>
+              <th>4.0.0</th>
+              <th>August 19, 2013</th>
+              <th><a class="text-dark" href="https://getbootstrap.com/docs/3.3/">https://getbootstrap.com/docs/3.3/</a></th>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+
+      </div>
+    </div>
     </div>
 
+    <footer
+      class="d-sm-flex fixed-bottom justify-content-center bg-dark text-white"
+    >
+      <ul
+        class="
+          d-sm-flex
+          list-unstyled
+          customFoot
+          w-100
+          align-items-center
+          justify-content-center
+        "
+      >
+        <li>
+          <a href="" class="text-decoration-none m-2"
+            >Official BootStrap Documentation</a
+          >
+        </li>
+        <li><a href="" class="text-decoration-none m-2">Mozilla Developer Network</a></li>
+        <li><a href="" class="text-decoration-none m-2">WC3</a></li>
+      </ul>
+    </footer>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   </body>

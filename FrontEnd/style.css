@@ -1,4 +1,4 @@
-* {
+*::before,*::after {
   box-sizing: border-box;
 }
 html {
@@ -35,5 +35,24 @@ body {
 
 nav > a.nav-link {
   font-size: 18px;
+}
+
+ul.customFoot>li>a{
+  color: white;
+}
+ul.customFoot>li>a:hover{
+  color:lightseagreen;
+}
+
+@media screen and (max-width:500px){
+  
+  ul.customFoot li:nth-child(1n+2){
+    display:none;
+  }
+
+  /* div.table-responsive{
+    margin-bottom: 40%;
+  } */
+
 }
 
