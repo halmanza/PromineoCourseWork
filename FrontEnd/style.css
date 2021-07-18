@@ -30,7 +30,7 @@ html {
   }
 
 body {
-  background-color: blanchedalmond;
+  background-color: lightslategrey;
   scroll-behavior: smooth;
 }
 
@@ -51,9 +51,7 @@ ul.customFoot>li>a:hover{
     display:none;
   }
 
-  /* div.table-responsive{
-    margin-bottom: 40%;
-  } */
+  
 
 }
 

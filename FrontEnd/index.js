@@ -10,5 +10,5 @@ function removeStyle(e,styleName){
 }
 
 paragraphDiv.addEventListener('click',function(e){
-    removeStyle('paragraphDiv','truncate-overflow');
+   removeStyle('paragraphDiv','truncate-overflow');
 })
