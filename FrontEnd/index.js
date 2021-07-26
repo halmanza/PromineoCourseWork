@@ -1,4 +1,4 @@
-let id=0;
+let id = 0;
 const createDeleteButton = (id) => {
   let btn = document.createElement("button");
   btn.className = "btn btn-primary";
@@ -13,9 +13,12 @@ const createDeleteButton = (id) => {
 
 addRow.addEventListener("click", (e) => {
   e.preventDefault();
- id++;
+  ++id;
 
   const tableElm = document.getElementById("mainTable");
+  if (!tableElm.children[0].rows[1]) {
+    id = 0;
+  }
   let row = tableElm.insertRow(-1);
 
   row.setAttribute("id", `item-${id}`);
@@ -28,5 +31,4 @@ addRow.addEventListener("click", (e) => {
   document.getElementById("firstName").value = "";
   document.getElementById("lastName").value = "";
   document.getElementById("emailItem").value = "";
-  id++;
 });
