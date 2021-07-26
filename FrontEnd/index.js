@@ -1,3 +1,4 @@
+let id=0;
 const createDeleteButton = (id) => {
   let btn = document.createElement("button");
   btn.className = "btn btn-primary";
@@ -12,7 +13,8 @@ const createDeleteButton = (id) => {
 
 addRow.addEventListener("click", (e) => {
   e.preventDefault();
-  let id = 0;
+ id++;
+
   const tableElm = document.getElementById("mainTable");
   let row = tableElm.insertRow(-1);
 
@@ -22,8 +24,9 @@ addRow.addEventListener("click", (e) => {
   row.insertCell(2).textContent = document.getElementById("emailItem").value;
   let actions = row.insertCell(3);
 
-  actions.append(createDeleteButton(id++));
+  actions.append(createDeleteButton(id));
   document.getElementById("firstName").value = "";
   document.getElementById("lastName").value = "";
   document.getElementById("emailItem").value = "";
+  id++;
 });
