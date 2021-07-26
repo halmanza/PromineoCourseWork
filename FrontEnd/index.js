@@ -4,7 +4,6 @@ const createDeleteButton = (id) => {
   btn.id = id;
   btn.textContent = "Delete";
   btn.onclick = () => {
-    console.log(`Delete row with id: item-${id}`);
     let elementToDelete = document.getElementById(`item-${id}`);
     elementToDelete.parentNode.removeChild(elementToDelete);
   };
@@ -16,7 +15,6 @@ addRow.addEventListener("click", (e) => {
   let id = 0;
   const tableElm = document.getElementById("mainTable");
   let row = tableElm.insertRow(-1);
- 
 
   row.setAttribute("id", `item-${id}`);
   row.insertCell(0).textContent = document.getElementById("firstName").value;
