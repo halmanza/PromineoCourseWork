@@ -13,8 +13,10 @@ class TicTacGame {
   }
 
   checkForWinner() {
+    const win1x= ['X',13,'X',13,'X',13]
+    
     let xValues = this.fieldValues.map((item) => {
-      return item.textContent.match(/x|o/i);
+      return item.textContent.match(/x/i);
     });
 
     let filterVal = xValues.filter((item) => {
@@ -24,7 +26,24 @@ class TicTacGame {
     let xKeys = filterVal.find((item) =>
       this.totalVal.push(item[0], item.index)
     );
+    console.log(xKeys)
+    console.log(this.totalVal)
+    let firstWinX= this.totalVal.length === win1x.length &&
+    this.totalVal.every((elm)=>{
+      return win1x.includes(elm);
+    })
 
+    switch (this.totalVal.length > 0){
+        case firstWinX:
+          console.log(true);
+          break;
+        default:
+          console.log('didnt work');
+    }
+  }
+
+  resetGameValues(){
+    this.totalVal=[];
   }
 }
 
@@ -33,6 +52,8 @@ class TicTacPlayer {
     this.player = player;
   }
 
+  /* Method that creates even listener on all the td elements in the div#gameData element, It 
+  fills the td with the players selected value of X or O */
   selectSquare(color) {
     let item = gameData.querySelectorAll("td");
 
@@ -47,6 +68,7 @@ class TicTacPlayer {
   }
 }
 
+// Utilitiy functionf or getting element ID
 function getId(id) {
   return document.getElementById(id);
 }
@@ -59,6 +81,7 @@ const xPlayer = new TicTacPlayer("X");
 
 getId("player-x").addEventListener("click", () => {
   xPlayer.selectSquare("darkred");
+ 
 });
 
 getId("player-0").addEventListener("click", () => {
@@ -71,8 +94,11 @@ getId("resetGame").addEventListener("click", () => {
     item.textContent = "free";
     item.style.background = "#212529";
   }
+  newGame.resetGameValues();
 });
 
 getId("gameData").addEventListener("click", () => {
   newGame.checkForWinner();
+  
 });
+
