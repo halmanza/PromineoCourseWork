@@ -13,12 +13,6 @@ class TicTacGame {
   }
 
   fieldValueCheck() {
-    let winDiagnol1 = [
-      { id: "row1_1", value: "X" },
-      { id: "row2_2", value: "X" },
-      { id: "row3_3", value: "X" },
-    ];
-
     this.fieldValues.flatMap((item) => {
       this.totalVal.push({
         id: item.firstElementChild.id,
@@ -33,21 +27,24 @@ class TicTacGame {
         value: item.lastElementChild.textContent,
       });
     });
+  }
 
-    let result = this.totalVal.filter((item) => {
-      return winDiagnol1.some((item2) => {
-        item.id === item2.id && item.value === item2.value;
-      });
-    });
-
-    console.log(Boolean(result));
-
-    // switch(this.fieldValues.length > 0){
-    //   case diagnolCheck1:
-    //     console.log(true)
-    //   default:
-    //     console.log('Nope')
-    // }
+  compareResults() {
+    if (
+      arrResult(newGame.totalVal, checkArray("row1_1", "row2_2", "row3_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(newGame.totalVal, checkArray("row1_1", "row2_2", "row3_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    }
   }
 
   resetGameValues() {
@@ -76,23 +73,42 @@ function getId(id) {
   return document.getElementById(id);
 }
 
+function checkArray(row1, row2, row3, valueInput) {
+  return [
+    { id: row1, value: valueInput },
+    { id: row2, value: valueInput },
+    { id: row3, value: valueInput },
+  ];
+}
+
+// Watches the tbody#gameData element's children for DOM changes
 function observeCallback(mutations) {
   for (let mute of mutations) {
     if (mute.type === "childList") {
       newGame.resetGameValues();
-      // newGame.fieldValues.flatMap((item) => console.log(item));
       newGame.fieldValueCheck();
       let testValue = newGame.totalVal.filter((item) => {
         return item;
       });
       console.log(testValue);
+      setTimeout(() => {
+        newGame.compareResults();
+      }, 100);
     }
   }
+}
+function arrResult(arr1, arr2) {
+  return arr1.filter((item) => {
+    return arr2.some((item2) => {
+      return item.id === item2.id && item.value === item2.value;
+    });
+  });
 }
 
 const newGame = new TicTacGame();
 newGame.createGameField();
 
+//Mutation Observer API usage
 const watchNode = document.getElementById("gameData");
 const oberserverObject = {
   childList: true,
@@ -106,27 +122,30 @@ const xPlayer = new TicTacPlayer("X");
 
 getId("buttonGroup").addEventListener("click", (e) => {
   let target = e.target;
-  switch (target.id) {
-    case "player-x":
-      watchNode.addEventListener("click", (e) => {
-        xPlayer.selectSquare(e, "darkred");
-      });
-      break;
-    case "player-0":
-      watchNode.addEventListener("click", (e) => {
-        circlePlayer.selectSquare(e, "lightsalmon");
-      });
-      break;
-    case "resetGame":
-      let resetItems = gameData.querySelectorAll("td");
-      for (let item of resetItems) {
-        item.textContent = "free";
-        item.style.background = "#212529";
-      }
 
-      newGame.resetGameValues();
-      break;
-    default:
-      console.log("Next Round");
+  if (target.id === "player-x") {
+    watchNode.addEventListener(
+      "click",
+      (e) => {
+        xPlayer.selectSquare(e, "darkred");
+      },
+      true
+    );
+  } else if (target.id === "player-0") {
+    watchNode.addEventListener(
+      "click",
+      (e) => {
+        circlePlayer.selectSquare(e, "lightsalmon");
+      },
+      true
+    );
+  } else if (target.id === "resetGame") {
+    let resetItems = gameData.querySelectorAll("td");
+    for (let item of resetItems) {
+      item.textContent = "free";
+      item.style.background = "#212529";
+    }
+    getId("hiddenAlert").className =
+      "d-none ";
   }
 });
