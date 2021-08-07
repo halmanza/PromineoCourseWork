@@ -31,19 +31,134 @@ class TicTacGame {
 
   compareResults() {
     if (
-      arrResult(newGame.totalVal, checkArray("row1_1", "row2_2", "row3_3", "X"))
+      arrResult(this.totalVal, checkArray("row1_1", "row2_2", "row3_3", "X"))
         .length === 3
     ) {
       getId("hiddenAlert").className =
         "d-flex flex-row justify-content-center alert alert-primary";
       getId("hiddenAlert").textContent = "X player wins!";
     } else if (
-      arrResult(newGame.totalVal, checkArray("row1_1", "row2_2", "row3_3", "O"))
+      arrResult(this.totalVal, checkArray("row1_1", "row2_2", "row3_3", "O"))
         .length === 3
     ) {
       getId("hiddenAlert").className =
         "d-flex flex-row justify-content-center alert alert-primary";
       getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row3_1", "row2_2", "row1_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row3_1", "row2_2", "row1_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_1", "row1_2", "row1_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_1", "row1_2", "row1_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row2_1", "row2_2", "row2_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row2_1", "row2_2", "row2_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row3_1", "row3_2", "row3_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row3_1", "row3_2", "row3_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_1", "row2_1", "row3_1", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_1", "row2_1", "row3_1", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_2", "row2_2", "row3_2", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_2", "row2_2", "row3_2", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_3", "row2_3", "row3_3", "X"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "X player wins!";
+    } else if (
+      arrResult(this.totalVal, checkArray("row1_3", "row2_3", "row3_3", "O"))
+        .length === 3
+    ) {
+      getId("hiddenAlert").className =
+        "d-flex flex-row justify-content-center alert alert-primary";
+      getId("hiddenAlert").textContent = "O player wins!";
+    } else {
+      let testVal = this.totalVal.map((item) => {
+        return this.totalVal.every(() => {
+          return item.value === "X" || item.value === "O";
+        });
+      });
+      let evalTest = testVal.every((test) => {
+        if (test === true) {
+          return true;
+        }
+      });
+
+      if (evalTest == true) {
+        getId("hiddenAlert").className =
+          "d-flex flex-row justify-content-center alert alert-secondary";
+        getId("hiddenAlert").textContent = "Draw!";
+      }
     }
   }
 
@@ -73,6 +188,7 @@ function getId(id) {
   return document.getElementById(id);
 }
 
+// Used in arrResult as an argument for comparison of object values
 function checkArray(row1, row2, row3, valueInput) {
   return [
     { id: row1, value: valueInput },
@@ -93,10 +209,11 @@ function observeCallback(mutations) {
       console.log(testValue);
       setTimeout(() => {
         newGame.compareResults();
-      }, 100);
+      }, 200);
     }
   }
 }
+//Compares two arrays of objects for id and value
 function arrResult(arr1, arr2) {
   return arr1.filter((item) => {
     return arr2.some((item2) => {
@@ -145,7 +262,6 @@ getId("buttonGroup").addEventListener("click", (e) => {
       item.textContent = "free";
       item.style.background = "#212529";
     }
-    getId("hiddenAlert").className =
-      "d-none ";
+    getId("hiddenAlert").className = "d-none ";
   }
 });
