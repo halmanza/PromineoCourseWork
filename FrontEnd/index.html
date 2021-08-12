@@ -10,14 +10,27 @@
       href="node_modules/bootstrap/dist/css/bootstrap.css"
     />
 
-    <title>Tic Tac Toe</title>
+    <title>JavaScript Versions</title>
   </head>
-  <body>
-    
-    
-    <script src="./index.js"></script>
+  <body class="container">
+    <div class="jumbotron jumbotron-fluid" id="buttonGroup">
+      <h2 class="text-center">New Entry</h2>
+      <input
+        type="text"
+        placeholder="Enter your entry"
+        id="input1"
+        class="text-center form-control"
+      />
+
+      <button class="btn btn-primary form-control" id="entryCreate">
+        create
+      </button>
+    </div>
+    <br />
+    <div id="App"></div>
+
+    <script src="./index.js" type="module"></script>
     <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    
   </body>
 </html>
