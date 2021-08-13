@@ -24,16 +24,12 @@ class EntryService {
     try {
       const createData = await fetch(this.uRL, {
         method: "POST",
-        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(EntryMaker),
       });
-
-      if (createData.ok) {
-        console.log("success");
-      }
+      return createData;
     } catch (err) {
       console.error(err);
     }
@@ -41,8 +37,8 @@ class EntryService {
 
   static async getAllEntries() {
     const data = await fetch(this.uRL);
-    
-    return await data.json()
+
+    return await data.json();
   }
 
   static async getEntry(id) {
@@ -56,6 +52,8 @@ class EntryService {
   }
 
   static async updateEntry(EntryMaker) {
+    const newCopy= {...EntryMaker}
+    delete newCopy._id;
     try {
       const data = await fetch(this.uRL + "/" + EntryMaker._id, {
         method: "PUT",
@@ -63,8 +61,9 @@ class EntryService {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(house),
+        body: JSON.stringify(newCopy),
       });
+
       return data;
     } catch (e) {
       console.error(e);
@@ -84,44 +83,108 @@ class DOMManager {
   static entries;
 
   static getAllEntries() {
-    EntryService.getAllEntries().then(entries=>{ this.render(entries)})
+    EntryService.getAllEntries().then((entries) => {
+      this.render(entries);
+    });
   }
 
+  static addEntry(name) {
+    EntryService.createPost(new EntryMaker(name))
+      .then(() => {
+        return EntryService.getAllEntries();
+      })
+      .then((entries) => this.render(entries));
+  }
+
+  static addSubEntry(id) {
+    for (let entry of this.entries) {
+      if (entry._id == id) {
+        entry.entries.push(
+          new Entry(
+            $(`#${entry._id}-entry-name`).val(),
+            $(`#${entry._id}-entry-area`).val()
+          )
+        );
+        console.log(entry.entries[0]);
+        EntryService.updateEntry(entry)
+          .then(() => {
+            return EntryService.getAllEntries();
+          })
+          .then((entries) => this.render(entries));
+      }
+    }
+  }
+
+  static deleteDOMEntry(id) {
+    EntryService.deleteEntry(id)
+      .then(() => {
+        return EntryService.getAllEntries();
+      })
+      .then((entries) => this.render(entries));
+  }
+
+  static deleteSubEntry(entryId,postTitle){
+    for(let entry of this.entries){
+      if(entry._id == entryId){
+        for(let post of entry.entries ){
+          if(post.title == postTitle){
+            entry.entries.splice(entry.entries.indexOf(post),1);
+            EntryService.updateEntry(entry)
+            .then(()=>{
+              return EntryService.getAllEntries();
+            }).then((entries)=> this.render(entries));
+          }
+        }
+      }
+    }
+  }
   static render(entries) {
     this.entries = entries;
-   
-    $('#App').empty()
+    
+    $("#App").empty();
     for (let entry of entries) {
-      $('#App').prepend(
+      $("#App").prepend(
         `
-        <div id="${entry.id}" class="card">
+        <div id="${entry._id}" class="card">
         <div class="card-header">
           <h2> ${entry.name}</h2>
-          <button class="btn btn-danger" onclick="DOMManager.delete('${entry._id}')">Delete</button>
+            <button class= "btn btn-danger" onclick="DOMManager.deleteDOMEntry('${entry._id}') ">Delete</button>
           </div>
           
           <div class="card-body">
             <div class="card">
               <div class="row">
                 <div class="col-sm">
-                <input type="text" id="${entry._id}-entry-title" class="form-control" placeholder="Entry title">
+                <input type="text" id="${entry._id}-entry-name" class="form-control" placeholder="Entry title">
                 </div>
                 <div class="col-sm">
-                <input type="text" id="${entry._id}-entry-body" class="form-control" placeholder="Entry body">
+                <input type="text" id="${entry._id}-entry-area" class="form-control" placeholder="Entry body">
                 </div>
               </div>
               <br/>
-              <button id="${entry._id}-new-entry" onclick="DOMManager.addEntry('${entry._id}')" class="btn btn-primary">Add
+              <button id="${entry._id}-new-entry" onclick="DOMManager.addSubEntry('${entry._id}')" class="btn btn-primary">Add
               </button>
             </div>
           
           </div>
-          </div>
+          </div><br/>
         `
       );
+      for (let post of entry.entries) {
+        
+        $(`#${entry._id}`)
+          .find(".card-body")
+          .append(
+            `<br/><p>
+            <span id="name-${post._id}"><strong> Title: </strong> ${post.title}</span><br/>
+            <span id="name-${post._id}"><strong> Body: </strong> ${post.body}</span>
+            <br/>
+            <button class="btn btn-danger"  onclick="DOMManager.deleteSubEntry('${entry._id}','${post.title}')">Delete</button>
+          </p>`
+          );
+      }
     }
   }
-  
 }
 
 function getId(id) {
@@ -135,11 +198,8 @@ async function execute(data) {
   });
 }
 
-// getId("entryCreate").addEventListener("click", () => {
-//   EntryService.createPost(new EntryMaker("Blog"));
-// });
+DOMManager.getAllEntries();
 
-// execute(EntryService.getAllEntries());
-// // EntryService.deleteEntry('61143418dc46c203e8b3b3ed');
-
-DOMManager.getAllEntries()
+getId("entryCreate").addEventListener("click", () => {
+  DOMManager.addEntry(getId("createNewEntry").value);
+});
