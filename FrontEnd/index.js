@@ -52,7 +52,7 @@ class EntryService {
   }
 
   static async updateEntry(EntryMaker) {
-    const newCopy= {...EntryMaker}
+    const newCopy = { ...EntryMaker };
     delete newCopy._id;
     try {
       const data = await fetch(this.uRL + "/" + EntryMaker._id, {
@@ -123,16 +123,17 @@ class DOMManager {
       .then((entries) => this.render(entries));
   }
 
-  static deleteSubEntry(entryId,postTitle){
-    for(let entry of this.entries){
-      if(entry._id == entryId){
-        for(let post of entry.entries ){
-          if(post.title == postTitle){
-            entry.entries.splice(entry.entries.indexOf(post),1);
+  static deleteSubEntry(entryId, postTitle) {
+    for (let entry of this.entries) {
+      if (entry._id == entryId) {
+        for (let post of entry.entries) {
+          if (post.title == postTitle) {
+            entry.entries.splice(entry.entries.indexOf(post), 1);
             EntryService.updateEntry(entry)
-            .then(()=>{
-              return EntryService.getAllEntries();
-            }).then((entries)=> this.render(entries));
+              .then(() => {
+                return EntryService.getAllEntries();
+              })
+              .then((entries) => this.render(entries));
           }
         }
       }
@@ -140,7 +141,7 @@ class DOMManager {
   }
   static render(entries) {
     this.entries = entries;
-    
+
     $("#App").empty();
     for (let entry of entries) {
       $("#App").prepend(
@@ -171,7 +172,6 @@ class DOMManager {
         `
       );
       for (let post of entry.entries) {
-        
         $(`#${entry._id}`)
           .find(".card-body")
           .append(
