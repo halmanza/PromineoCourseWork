@@ -105,7 +105,7 @@ class DOMManager {
             $(`#${entry._id}-entry-area`).val()
           )
         );
-        console.log(entry.entries[0]);
+        console.log(entry.entries);
         EntryService.updateEntry(entry)
           .then(() => {
             return EntryService.getAllEntries();
